@@ -1,0 +1,4 @@
+config MMU
+	bool "MMU Support"
+
+

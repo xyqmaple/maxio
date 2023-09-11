@@ -1,0 +1,42 @@
+menu "Library Configuration"
+
+config TRACE
+	bool "Trace System Running Support"
+
+if TRACE
+
+config TRACE_FUNC_DEPTH
+	int "Trace Function Depth"
+	default 32
+
+endif
+
+comment "Dynamic Memory Allocation Support"
+
+config MEM_COPY
+	bool "Use self mem_copy function"
+	help
+	  The library function 'memcpy' sometimes behaves abnormally.
+	  So use self 'mem_copy' function to replace it.
+
+config MEM_CLEAR
+	bool "Use self mem_clear function"
+	help
+	  The library function 'memset' sometimes behaves abnormally.
+	  So use self 'mem_clear' function to replace it.
+
+config MEM_ALLOC_ADDR
+	hex "Start address of dynamic memory allocation"
+	default 0x20000000
+	help
+	  For MarsG2x:
+	  iram: 0x0602_0000 ~ 0x0603_ffff
+	  dram: 0x2000_0000 ~ 0xffff_ffff, 0x1_0000_0000 ~ 0x1_1fff_ffff,
+	        0x1_2000_0000 ~ 0x1_ffff_ffff, 0x2_0000_0000 ~ 0x2_1fff_ffff
+
+config MEM_ALLOC_SIZE
+	hex "Total size for dynamic memory allocation"
+	default 0x6000000
+
+endmenu
+

@@ -1,0 +1,89 @@
+#
+# Automatically generated file; DO NOT EDIT.
+# MarsG2x Global Configuration List
+#
+
+#
+# General setup
+#
+# CONFIG_ARM_32 is not set
+CONFIG_ARM_64=y
+# CONFIG_PLAT_COSIM is not set
+# CONFIG_PLAT_FPGA is not set
+CONFIG_PLAT_ASIC=y
+CONFIG_MAXIO=y
+# CONFIG_HIKVISION is not set
+CONFIG_LITTLE_ENDIAN=y
+CONFIG_ARCH_USE_BUILTIN_BSWAP=y
+CONFIG_DMA_ALIGN=8
+# end of General setup
+
+#
+# Library Configuration
+#
+# CONFIG_TRACE is not set
+
+#
+# Dynamic Memory Allocation Support
+#
+# CONFIG_MEM_COPY is not set
+# CONFIG_MEM_CLEAR is not set
+CONFIG_MEM_ALLOC_ADDR=0x50000000
+CONFIG_MEM_ALLOC_SIZE=0x6000000
+# end of Library Configuration
+
+#
+# System Configuration
+#
+CONFIG_MMU=y
+CONFIG_USB=y
+CONFIG_USB_HOST=y
+CONFIG_USB_XHCI_HCD=y
+CONFIG_USB_XHCI_REG_BASE=0x10c00000
+CONFIG_USB_XHCI_REG_PORT_OFFSET=0x30
+CONFIG_USB_XHCI_MAX_INTR=1
+# CONFIG_USB_GADGET is not set
+CONFIG_USB_PHY=y
+# CONFIG_USB_PHY_SSC is not set
+CONFIG_USB_PM=y
+# CONFIG_USB_TIMEOUT is not set
+
+#
+# USB Imaging devices
+#
+# CONFIG_USB_DWC2 is not set
+CONFIG_USB_DWC3=y
+CONFIG_USB_DWC3_HOST=y
+CONFIG_USB_DWC3_REG_BASE=0x10c00000
+# CONFIG_USB_DWC3_FAST_SIMULATION is not set
+# CONFIG_USB_DWC3_DEBUG_BUS is not set
+# CONFIG_USB_DWC3_QUIRK_VBUS is not set
+
+#
+# USB miscellaneous options
+#
+# CONFIG_USB_SKIP_CHK_HCPRIV is not set
+# CONFIG_USB_SKIP_MEM_CLEAR is not set
+# CONFIG_USB_SKIP_EP0_REINIT is not set
+# CONFIG_USB_PERFORMANCE is not set
+# CONFIG_USB_COMPLIANCE is not set
+# CONFIG_USB_SWITCH_FREQUENCY is not set
+# CONFIG_USB_POWER_CONSUME is not set
+# CONFIG_USB_SLT is not set
+# CONFIG_USB_HTOL is not set
+# CONFIG_USB_ATE is not set
+# CONFIG_USB_LOOPBACK is not set
+
+#
+# USB debug options
+#
+# CONFIG_USB_RECORD_REGOP is not set
+
+#
+# Test for Other Modules on the Board
+#
+# CONFIG_USB_FOR_LPC_TEST is not set
+# CONFIG_USB_FOR_TRUSTZONE_TEST is not set
+# CONFIG_USB_FOR_MISC_TEST is not set
+# end of Test for Other Modules on the Board
+# end of System Configuration

@@ -1,0 +1,34 @@
+menuconfig USB_HOST
+	bool "Support for Host-side USB"
+
+if USB_HOST
+
+config USB_XHCI_HCD
+	bool "xHCI HCD (USB 3.0) Support"
+
+if USB_XHCI_HCD
+
+config USB_XHCI_REG_BASE
+	hex "xHCI Regsiter Base Address"
+	default 0x10c00000
+	help
+	  Start from HC capability registers
+
+config USB_XHCI_REG_PORT_OFFSET
+	hex "xHCI Port Register Offset"
+	default 0x30
+	help
+	  MarsG2x doesn't follow xHCI Spec when calculating the register
+	  address associated with port(eg. PORTSC...)
+	  So an offset address needs to be added here to calculate the 
+	  correct register address.
+
+config USB_XHCI_MAX_INTR
+	int "xHCI Interrupt Number"
+	range 1 1024
+	default 1
+
+endif # USB_XHCI_HCD
+
+endif # USB_HOST
+

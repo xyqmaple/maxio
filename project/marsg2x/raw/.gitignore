@@ -1,0 +1,4 @@
+.config
+.config.old
+include/config
+include/generated

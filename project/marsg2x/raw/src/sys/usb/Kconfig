@@ -1,0 +1,133 @@
+menuconfig USB
+	bool "USB Support"
+	default y
+
+if USB
+
+source "src/sys/usb/host/Kconfig"
+source "src/sys/usb/gadget/Kconfig"
+source "src/sys/usb/phy/Kconfig"
+
+config USB_PM
+	bool "Support Power Management"
+	default y if USB
+
+config USB_TIMEOUT
+	bool "Support Timeout Mechanism"
+	default y
+	help
+	  If there is no timeout mechanism for data transfer, special circumstances
+	  may cause the program to wait all the time.
+
+	  If select this option, the program will automatically exit the wait after
+	  data transmission timeout and continue to execute subsequent content
+
+config USB_TIMEOUT_RATIO
+	int "Zoom Ratio for Timeout Mechanism"
+	depends on USB_TIMEOUT
+	default 0 if PLAT_COSIM
+	default 8 if PLAT_FPGA
+	default 12 if PLAT_ASIC
+
+comment "USB Imaging devices"
+
+source "src/sys/usb/dwc2/Kconfig"
+source "src/sys/usb/dwc3/Kconfig"
+
+comment "USB miscellaneous options"
+
+config USB_SKIP_CHK_HCPRIV
+	bool "Sikp Check HC Private Data"
+	default y if PLAT_COSIM
+
+config USB_SKIP_MEM_CLEAR
+	bool "Skip Clear Memory Buffer"
+	default y if PLAT_COSIM
+
+config USB_SKIP_EP0_REINIT
+	bool "Skip Re-Initialize EP0"
+	default y if PLAT_COSIM
+
+config USB_PERFORMANCE
+	bool "Support Performance Test"
+	help
+	  This option shall optimize the configuration to ensure that
+	  the device can transfer data with optimal performance.
+
+config USB_PRESSURE
+	bool "Support Pressure Test"
+	help
+	  This option may modify part of the configuration to meet
+	  the stress test requirements.
+
+config USB_COMPLIANCE
+	bool "Support Compliance Test"
+	depends on USB_DWC3
+	help
+	  This option may have no effect on USB device mode. Generally,
+	  Compliance mode is enabled on the device by default.
+
+config USB_COMPLIANCE_ADVANCE
+	bool "Auto Advance the Compliance Pattern"
+	depends on USB_COMPLIANCE
+
+config USB_TEST_PATTERN
+	bool "Support Test Pattern for Eye etc."
+	depends on USB_DWC2
+	help
+	  Default to send "Test_Packet" for testing eye pattern.
+
+config USB_SWITCH_FREQUENCY
+	bool "Support Switch Frequency Test"
+
+config USB_POWER_CONSUME
+	bool "Support Power Consume Test"
+
+config USB_SLT
+        bool "Support System Level Test"
+        depends on USB_HOST
+
+config USB_HTOL
+	bool "Support High Termperature Operation Life Test"
+
+config USB_ATE
+	bool "Support Automatic Test Equipment"
+	depends on USB_PHY
+
+config USB_LOOPBACK
+	bool "Support Loopback Test"
+	depends on USB_PHY
+
+if USB_LOOPBACK
+
+config USB_LOOPBACK_EXTERNAL
+	bool "Support External Loopback Test"
+
+config USB_LOOPBACK_INTERNAL
+	bool "Support Internal Loopback Test"
+
+endif # USB_LOOPBACK
+
+config USB_GADGET_HOTPLUG
+	bool "Support Hotplug Test(FIXME)"
+	depends on USB_GADGET
+
+comment "USB debug options"
+
+config USB_DISPLAY_REGOP
+	bool "Print Regiter R/W Operations"
+
+config USB_EXPORT_REGOP
+	bool "Export Register R/W Operation"
+	help
+	  The user can directly perform the read-write operation
+	  of the exported register by directly reading and writing
+	  the register address.
+
+config USB_DEBUG_TOOL
+	bool
+
+source "src/sys/usb/board/Kconfig"
+
+endif # USB
+
