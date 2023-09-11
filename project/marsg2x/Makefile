@@ -15,15 +15,16 @@ endif
 
 export Q
 
-MCONF := ../scripts/kconfig/mconf
+KCONFIG_PATH := ../../scripts/kconfig
+MCONF := $(KCONFIG_PATH)/mconf
 $(MCONF):
-	$(Q)make CC=gcc HOSTCC=gcc -C ../scripts/kconfig
+	$(Q)make CC=gcc HOSTCC=gcc -C $(KCONFIG_PATH)
 menuconfig: $(MCONF)
 	$(Q)rm -rf ./include
 	$(Q)$(MCONF) Kconfig
 
 distclean:
-	$(Q)make CC=gcc HOSTCC=gcc -C ../scripts/kconfig distclean
+	$(Q)make CC=gcc HOSTCC=gcc -C $(KCONFIG_PATH) distclean
 	$(Q)rm -rf ./include
 
 .PHONY: menuconfig distclean
