@@ -1,0 +1,29 @@
+menu "Test for Other Modules on the Board" 
+
+config USB_FOR_LPC_TEST
+	bool "Support Low Power Control Test"
+	depends on USB_HOST
+
+config USB_FOR_TRUSTZONE_TEST
+	bool "Supoort TrustZone Test"
+	depends on USB_HOST
+
+config USB_FOR_MISC_TEST
+	bool "Support Miscellaneous Test"
+	depends on USB_HOST
+
+if USB_FOR_MISC_TEST
+
+config USB_MISC_TEST_DRAM_HIGHLOAD
+	bool "Simulate DRAM Highload"
+	help
+	  Please skip the following DRAM range which has been used by other modules.
+
+	  0x4000_0000 ~ 0x8000_0000 (HIK IMG)
+	  0x9000_0000 ~ 0x9e00_0000 (VENC)
+	  see "gdma_cfg_max" for detail (GDMA)
+
+endif # USB_FOR_MISC_TEST
+
+endmenu
+

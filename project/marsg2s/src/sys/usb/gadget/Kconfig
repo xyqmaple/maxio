@@ -1,0 +1,67 @@
+menuconfig USB_GADGET
+	bool "Support for Device-side USB"
+
+if USB_GADGET
+
+config USB_GADGET_ENABLE_U1U2
+	bool "Enable U1/U2 Link State"
+	default y
+
+config USB_GADGET_VBUS_DRAW
+	int "Maximum VBUS Power usage (2-500 mA)"
+	range 2 500
+	default 2
+
+comment "USB Device Class drivers"
+
+config USB_GADGET_CUSTOM
+	bool "Custom"
+
+config USB_GADGET_STORAGE
+	bool "Mass Storage"
+
+if USB_GADGET_STORAGE
+
+config USB_GADGET_STORAGE_NUM_EPGRP
+	int "Endpoint Number in Pairs"
+	range 1 15
+	default 1
+	help
+	  The group number of endpoint for bulk transfer. An IN endpoint and
+	  an OUT endpoint form a group of endpoints.
+
+	  As far as we known, dwc2 supports up to 6 groups of endpoints, 
+	  dwc3 supports up to 9 groups of endpoints.
+
+config USB_GADGET_STORAGE_NUM_BUFFERS
+	int "Cache Buffer Number"
+	default 32
+	help
+	  The number of buffers for bulk transfer.
+
+config USB_GADGET_STORAGE_BUFFER_SIZE
+	hex "Cache Buffer Size"
+	default 0x4000
+	help
+	  The size of buffer for bulk transfer. Larger buffers may have
+	  better R/W performance.
+	  
+	  As far as we known, the buffer size field in dwc3 TRB supports up
+	  to (16MiB - 1).
+
+config USB_GADGET_STORAGE_NUM_LUNS
+	int "Logical Unit Number"
+	default 1
+
+config USB_GADGET_STORAGE_ADDR
+	hex "LUN Address"
+	default 0x27000000
+
+config USB_GADGET_STORAGE_SIZE
+	hex "LUN Size"
+	default 0x8000000
+
+endif # USB_GADGET_STORAGE
+
+endif # USB_GADGET
+

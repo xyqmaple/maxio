@@ -1,0 +1,65 @@
+config USB_DWC2
+	bool "Designware USB2 DRD Core Support"
+
+if USB_DWC2
+
+choice
+	bool "DWC2 Mode Selection"
+	default USB_DWC2_DUAL_ROLE if (USB_HOST && USB_GADGET)
+	default USB_DWC2_HOST if USB_HOST
+	default USB_DWC2_GADGET if USB_GADGET
+
+config USB_DWC2_HOST
+	bool "Host only mode"
+	depends on USB_HOST
+	help
+	  Select this when you want to use DWC2 in host mode only,
+	  thereby the gadget feature will be regressed.
+
+config USB_DWC2_GADGET
+	bool "Gadget only mode"
+	depends on USB_GADGET
+	help
+	  Select this when you want to use DWC2 in gadget mode only,
+	  thereby the host feature will be regressed.
+
+config USB_DWC2_DUAL_ROLE
+	bool "Dual Role mode"
+	depends on (USB_HOST && USB_GADGET)
+	help
+	  This is the default mode of working of DWC2 controller where
+	  both host and gadget features are enabled.
+
+endchoice
+
+config USB_DWC2_REG_BASE
+	hex "DWC2 Register Base Address"
+	default 0x14000000
+
+config USB_DWC2_SGDMA
+	bool "Enable Scatter/Gather DMA mode"
+	help
+	  Use scatter/gather DMA mode if select this option.
+	  Otherwise, buffer DMA mode is used by default.
+
+config USB_DWC2_FS
+	bool "Limit to Full-Speed"
+	help
+	  Limit the transfer speed to Full-Speed if select this option.
+	  Otherwise, it will automatically negotiate to High-Speed.
+
+	  Host mode may not support to force limit to Full-Speed. 
+
+config USB_DWC2_DEBUG
+	bool "Enable Debugging Message"
+	help
+	  Say Y here to enable debugging messages in the DWC2 Driver.
+
+config USB_DWC2_DEBUG_TOOL
+	bool "Support Debug Tool"
+	select USB_DEBUG_TOOL
+	help
+	  Say Y here to support debug tool in the DWC2 Driver.
+
+endif # USB_DWC2
+

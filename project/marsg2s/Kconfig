@@ -1,0 +1,61 @@
+mainmenu "MarsG2x Global Configuration List"
+
+menu "General setup"
+
+choice
+	bool "Architecture"
+	default ARM_64
+
+config ARM_32
+	bool "ARM32"
+
+config ARM_64
+	bool "ARM64"
+	select LITTLE_ENDIAN
+	select ARCH_USE_BUILTIN_BSWAP
+
+endchoice
+
+choice
+	bool "Platform Environment"
+	default PLAT_ASIC
+
+config PLAT_COSIM
+	bool "Cosim"
+
+config PLAT_FPGA
+	bool "FPGA"
+
+config PLAT_ASIC
+	bool "ASIC"
+
+endchoice
+
+choice
+	bool "Board Environment"
+	default MAXIO
+
+config MAXIO
+	bool "Maxio EVB"
+
+config HIKVISION
+	bool "Hikvision EVB"
+
+endchoice
+
+config LITTLE_ENDIAN
+	bool
+
+config ARCH_USE_BUILTIN_BSWAP
+	bool
+
+config DMA_ALIGN
+	int "DMA address requres aligned size"
+	default 8 if ARM_64
+	default 4 if ARM_32
+
+endmenu
+
+source "src/lib/Kconfig"
+source "src/sys/Kconfig"
+

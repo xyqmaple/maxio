@@ -1,0 +1,7 @@
+menu "System Configuration"
+
+source "src/sys/cpu/Kconfig"
+source "src/sys/usb/Kconfig"
+
+endmenu
+

@@ -1,0 +1,13 @@
+config USB_PHY
+	bool "USB PHY Support"
+	default y
+
+if USB_PHY
+
+config USB_PHY_SSC
+	bool "USB PHY SSC Support"
+	help
+	  This option will enable the SSC(Spread Spectrum Clock) of USB PHY.
+
+endif
+
