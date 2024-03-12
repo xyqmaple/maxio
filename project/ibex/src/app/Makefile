@@ -1,0 +1,2 @@
+
+app-y			:= main.o
